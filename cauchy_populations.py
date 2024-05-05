@@ -88,6 +88,7 @@ class CauchySolving:
         y1 = [y[i] for i in range(0, len(y), int(len(y)/5))]
         plt.plot(x1, y1, 'D', markersize=7, color="#FF6E4A")
         plt.grid(which='major', linewidth=0.3, color="white")
+        plt.savefig(f'last_run_results/Dependence of {leader} on {driven}.png') 
         plt.show()
         
     def iter_explicit_Euler(self):
