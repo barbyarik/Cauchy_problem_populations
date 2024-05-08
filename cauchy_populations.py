@@ -92,6 +92,20 @@ class CauchySolving:
         plt.savefig(f'last_run_results/Dependence of {leader} on {driven}.png') 
         plt.show()
         
+    def write_result(self, time, iter_num, method_name): 
+        with open('last_run_results/about_last_run.txt', 'w') as f:
+            f.write(f"Initial conditions (x, y, alpha1, alpha2, epsilon):")
+            f.write(f" {', '.join(map(str, list(self.initial)))};\n")
+            f.write(f"Method: {method_name};\n")
+            f.write(f"The processed t interval: from 0 to {round(self.timeline[-1], 4)};\n")
+            f.write(f"Number of useful iterations: {iter_num};\n")
+            f.write(f"The time of run: {round(time, 4)} seconds;")
+        self.draw_one_plot("t", "x")
+        self.draw_one_plot("t", "y")
+        self.draw_one_plot("t", "a1")
+        self.draw_one_plot("t", "a2")
+        self.draw_one_plot("x", "y")
+
     def iter_explicit_Euler(self):
         vector = self.current_vector()
         shift = self.shift
@@ -117,18 +131,8 @@ class CauchySolving:
                     iterations_num = i + 1
                     break
         end = time.time()
-        with open('last_run_results/about_last_run.txt', 'w') as f:
-            f.write(f"Initial conditions (x, y, alpha1, alpha2, epsilon):")
-            f.write(f" {list(self.initial)};\n")
-            f.write(f"Method: explicit Euler;\n")
-            f.write(f"The processed time interval: 0-{round(self.timeline[-1], 4)};\n")
-            f.write(f"Number of useful iterations: {iterations_num};\n")
-            f.write(f"The time of run: {round(end - start, 4)} seconds;")
-        self.draw_one_plot("t", "x")
-        self.draw_one_plot("t", "y")
-        self.draw_one_plot("t", "a1")
-        self.draw_one_plot("t", "a2")
-        self.draw_one_plot("x", "y")
+        self.write_result(end-start, iterations_num, "explicit Euler")
+        
         
     def iter_explicit_Euler_recalc(self):
         vector = self.current_vector()
@@ -157,18 +161,7 @@ class CauchySolving:
                     iterations_num = i + 1
                     break
         end = time.time()
-        with open('last_run_results/about_last_run.txt', 'w') as f:
-            f.write(f"Initial conditions (x, y, alpha1, alpha2, epsilon):")
-            f.write(f" {list(self.initial)};\n")
-            f.write(f"Method: explicit Euler recalc;\n")
-            f.write(f"The processed time interval: 0-{round(self.timeline[-1], 4)};\n")
-            f.write(f"Number of useful iterations: {iterations_num};\n")
-            f.write(f"The time of run: {round(end - start, 4)} seconds;")
-        self.draw_one_plot("t", "x")
-        self.draw_one_plot("t", "y")
-        self.draw_one_plot("t", "a1")
-        self.draw_one_plot("t", "a2")
-        self.draw_one_plot("x", "y")
+        self.write_result(end-start, iterations_num, "explicit Euler with recalc")
     
     def iter_explicit_Runge_Kutta4(self):
         vector = self.current_vector()
@@ -199,18 +192,7 @@ class CauchySolving:
                     iterations_num = i + 1
                     break
         end = time.time()
-        with open('last_run_results/about_last_run.txt', 'w') as f:
-            f.write(f"Initial conditions (x, y, alpha1, alpha2, epsilon):")
-            f.write(f" {list(self.initial)};\n")
-            f.write(f"Method: explicit RungeKutta4;\n")
-            f.write(f"The processed time interval: 0-{round(self.timeline[-1], 4)};\n")
-            f.write(f"Number of useful iterations: {iterations_num};\n")
-            f.write(f"The time of run: {round(end - start, 4)} seconds;")
-        self.draw_one_plot("t", "x")
-        self.draw_one_plot("t", "y")
-        self.draw_one_plot("t", "a1")
-        self.draw_one_plot("t", "a2")
-        self.draw_one_plot("x", "y")
+        self.write_result(end-start, iterations_num, "explicit RungeKutta4")
     
     def iter_implicit_Euler(self, offset_to_break_out=None):
         vector = self.current_vector()
@@ -291,18 +273,7 @@ class CauchySolving:
                     iterations_num = i + 1
                     break
         end = time.time()
-        with open('last_run_results/about_last_run.txt', 'w') as f:
-            f.write(f"Initial conditions (x, y, alpha1, alpha2, epsilon):")
-            f.write(f" {list(self.initial)};\n")
-            f.write(f"Method: implicit Euler;\n")
-            f.write(f"The processed time interval: 0-{round(self.timeline[-1], 4)};\n")
-            f.write(f"Number of useful iterations: {iterations_num};\n")
-            f.write(f"The time of run: {round(end - start, 4)} seconds;")
-        self.draw_one_plot("t", "x")
-        self.draw_one_plot("t", "y")
-        self.draw_one_plot("t", "a1")
-        self.draw_one_plot("t", "a2")
-        self.draw_one_plot("x", "y")
+        self.write_result(end-start, iterations_num, "implicit Euler")
 
     def iter_implicit_trapezoid(self):
         vector = self.current_vector()
@@ -380,18 +351,7 @@ class CauchySolving:
                     iterations_num = i + 1
                     break
         end = time.time()
-        with open('last_run_results/about_last_run.txt', 'w') as f:
-            f.write(f"Initial conditions (x, y, alpha1, alpha2, epsilon):")
-            f.write(f" {list(self.initial)};\n")
-            f.write(f"Method: implicit trapezoid;\n")
-            f.write(f"The processed time interval: 0-{round(self.timeline[-1], 4)};\n")
-            f.write(f"Number of useful iterations: {iterations_num};\n")
-            f.write(f"The time of run: {round(end - start, 4)} seconds;")
-        self.draw_one_plot("t", "x")
-        self.draw_one_plot("t", "y")
-        self.draw_one_plot("t", "a1")
-        self.draw_one_plot("t", "a2")
-        self.draw_one_plot("x", "y")
+        self.write_result(end-start, iterations_num, "implicit trapezoid")
     
 #     def iter_implicit_Runge_Kutta4(self, offset_to_break_out=None):
 #         vector = self.current_vector()
