@@ -92,7 +92,7 @@ class CauchySolving:
         plt.savefig(f'last_run_results/Dependence of {leader} on {driven}.png') 
         plt.show()
         
-    def write_result(self, time, iter_num, method_name): 
+    def write_results(self, time, iter_num, method_name): 
         with open('last_run_results/about_last_run.txt', 'w') as f:
             f.write(f"Initial conditions (x, y, alpha1, alpha2, epsilon):")
             f.write(f" {', '.join(map(str, list(self.initial)))};\n")
@@ -131,7 +131,7 @@ class CauchySolving:
                     iterations_num = i + 1
                     break
         end = time.time()
-        self.write_result(end-start, iterations_num, "explicit Euler")
+        self.write_results(end-start, iterations_num, "explicit Euler")
         
         
     def iter_explicit_Euler_recalc(self):
@@ -161,7 +161,7 @@ class CauchySolving:
                     iterations_num = i + 1
                     break
         end = time.time()
-        self.write_result(end-start, iterations_num, "explicit Euler with recalc")
+        self.write_results(end-start, iterations_num, "explicit Euler with recalc")
     
     def iter_explicit_Runge_Kutta4(self):
         vector = self.current_vector()
@@ -192,7 +192,7 @@ class CauchySolving:
                     iterations_num = i + 1
                     break
         end = time.time()
-        self.write_result(end-start, iterations_num, "explicit RungeKutta4")
+        self.write_results(end-start, iterations_num, "explicit RungeKutta4")
     
     def iter_implicit_Euler(self, offset_to_break_out=None):
         vector = self.current_vector()
@@ -273,7 +273,7 @@ class CauchySolving:
                     iterations_num = i + 1
                     break
         end = time.time()
-        self.write_result(end-start, iterations_num, "implicit Euler")
+        self.write_results(end-start, iterations_num, "implicit Euler")
 
     def iter_implicit_trapezoid(self):
         vector = self.current_vector()
@@ -351,7 +351,7 @@ class CauchySolving:
                     iterations_num = i + 1
                     break
         end = time.time()
-        self.write_result(end-start, iterations_num, "implicit trapezoid")
+        self.write_results(end-start, iterations_num, "implicit trapezoid")
     
 #     def iter_implicit_Runge_Kutta4(self, offset_to_break_out=None):
 #         vector = self.current_vector()
