@@ -1,0 +1,5 @@
+Initial conditions (x, y, alpha1, alpha2, epsilon): [40.0, 10.0, 0.0, 10.0, 0.005];
+Method: implicit Euler;
+The processed time interval: 0-100.01;
+Number of useful iterations: 10000;
+The time of run: 1.2792 seconds;
