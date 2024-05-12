@@ -84,10 +84,9 @@ class CauchySolving:
         plt.title(f'Dependence of {leader} on {driven}', weight='bold')
         plt.xlabel(f'{leader}-axis', weight='bold')
         plt.ylabel(f'{driven}-axis', weight='bold')
-        plt.plot(x, y, color="#FF6E4A", linewidth=4)
+        plt.plot(x, y, color="#FF6E4A", linewidth=2)
         x1 = [x[i] for i in range(0, len(x), int(len(x)/5))]
         y1 = [y[i] for i in range(0, len(y), int(len(y)/5))]
-        plt.plot(x1, y1, 'D', markersize=7, color="#FF6E4A")
         plt.grid(which='major', linewidth=0.3, color="white")
         plt.savefig(f'last_run_results/Dependence of {leader} on {driven}.png') 
         plt.show()
@@ -352,29 +351,9 @@ class CauchySolving:
                     break
         end = time.time()
         self.write_results(end-start, iterations_num, "implicit trapezoid")
-    
-#     def iter_implicit_Runge_Kutta4(self, offset_to_break_out=None):
-#         vector = self.current_vector()
-#         k1_d_vect = self.derivatives_vector(vector)
-#         k2_d_vect = self.derivatives_vector(vector)
-#         k1_d_vect = self.derivatives_vector(vector)
-#         k1_d_vect = self.derivatives_vector(vector)
-#         shift = self.shift
-#         eps = self.eps_const
-#         if shift is None: shift = self.dynamic_shift()
-            
-#         def implct_RK4_kfunc(w):
-#             F = np.zeros(4)
-#             F[0] = w[0]-vector[0]-shift/6*()
-#             F[1] =
-#             F[2] =
-#             F[3] =
-#             return F    
-    
-#     def method_implicit_Runge_Kutta4(self):
-#         ...
+
         
 if __name__ == "__main__":
-    default_case = [40, 10, 0, 10, 0.005, 0.01]
+    default_case = [40, 10, 0, 10, 10**(-3), 0.01]
     c = CauchySolving(default_case)
-    c.method_implicit_Euler(10000)
+    c.method_implicit_Euler(20000)
